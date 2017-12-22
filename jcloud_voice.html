@@ -1,0 +1,333 @@
+<!-- CSS Styles -->
+
+<!-- Latest compiled and minified CSS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+
+<!-- Latest compiled and minified Locales -->
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-EN.min.js"></script>
+ -->
+
+
+
+ <div class="container">
+  <div class="col-md-12">
+    <h1>
+      <p class="bg-success">JCloud Natural Language Engine!!</p></h1>
+    <div class="panel panel-success">
+      We currenly Support the following queries said EXACTLY as written below
+
+      <ul class="list-group">
+  <li class="list-group-item d-flex justify-content-between align-items-center">Show me all the transactions
+  <span class="badge badge-primary badge-pill">14</span>
+</li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">Show me information about :Artist:
+  <span class="badge badge-primary badge-pill">14</span>
+</li>
+  <ul> Example: Show me Information about John Mayer</ul>
+  
+</ul>
+            
+
+    </div>
+  </div>
+</div>        
+</div>
+</div>
+</div>
+
+<style>
+  .speech {border: 1px solid #DDD; width: 300px; padding: 0; margin: 0}
+  .speech input {border: 0; width: 240px; display: inline-block; height: 30px;}
+  .speech img {float: right; width: 40px }
+</style>
+
+<!-- Search Form -->
+<form class = "uid_form">
+  <div class="input-group">
+  </div>
+</form>
+
+<form id="labnol" method="get" action="parse_speech()">
+  <div class="speech">
+    <input type="text" name="q" id="transcript" placeholder="Speak" />
+    <img onclick="startDictation()" src="//i.imgur.com/cHidSVu.gif" />
+  </div>
+</form>
+
+<!-- HTML5 Speech Recognition API -->
+<script>
+  function startDictation() {
+
+    if (window.hasOwnProperty('webkitSpeechRecognition')) {
+
+      var recognition = new webkitSpeechRecognition();
+
+      recognition.continuous = false;
+      recognition.interimResults = false;
+
+      recognition.lang = "en-US";
+      recognition.start();
+
+      recognition.onresult = function(e) {
+        document.getElementById('transcript').value
+                                 = e.results[0][0].transcript;
+        recognition.stop();
+        // document.getElementById('labnol').submit();
+        parse_speech(document.getElementById('transcript').value);
+      };
+
+      recognition.onerror = function(e) {
+        recognition.stop();
+      }
+
+    }
+  }
+
+  function parse_speech(str)
+  {
+    if(str == "show me all the transactions")
+    {
+
+       window.location.href = "http://cs.jhu.edu/~agupta82/jcloud_transactions.html";
+    } 
+    else if( str.search("show me information about") >= 0)
+    {
+      window.location.href = "http://cs.jhu.edu/~agupta82/jcloud_artist_info?uid=" + str.substring(26)
+    }
+    // else
+    // {
+    //   document.getElementById('transcript').value = "Try Again from the list of commands above!"
+    // }
+  }
+</script>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JCloud</title>
+  <!-- META TAGS -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+  <meta name="author" content="Amine Akhouad">
+  <meta name="description" content="JCloud is the sound of Johns Hopkins">
+
+  <!-- STYLES -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/ionicons.min.css">
+  <link rel="stylesheet" href="assets/css/flexslider.css">
+  <link rel="stylesheet" href="assets/css/animsition.min.css">
+  <link rel="stylesheet" href="assets/css/animate.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="animsition">
+  <!-- HEADER  -->
+  <header class="main-header">
+    <div class="container">
+      <div class="logo">
+      </div>
+
+      <div class="menu">
+        <!-- desktop navbar -->
+        <nav class="desktop-nav">
+          <ul class="first-level">
+            <li><a href="index.html" class="animsition-link">Home</a></li>
+            <li><a href="http://cs.jhu.edu/~agupta82/jcloud_voice.html" class="animsition-link">JCloud Voice!</a></li>
+            <li><a href="http://cs.jhu.edu/~agupta82/jcloud_dashboard.html" class="animsition-link">User Dashboards</a></li>
+            <li><a href="http://cs.jhu.edu/~agupta82/jcloud_artist_info.html" class="animsition-link">Artist Info</a></li>
+            <li><a href="http://cs.jhu.edu/~agupta82/jcloud_transactions.html">All Transactions</a>
+            </li>
+            <li><a href="">Songs Info</a>
+            </li>
+          </ul>
+        </nav>
+        <!-- mobile navbar -->
+        <nav class="mobile-nav"></nav>
+        <div class="menu-icon">
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION  -->
+  <div class="site-hero">
+    <ul class="slides">
+      <li>
+        <div><span class="small-title uppercase montserrat-text">we're</span></div>
+        <div class="big-title uppercase montserrat-text">JCloud!</div>
+        <p>A database that supports a media library much like SoundCloud. It stores information for each song or other audio files in the library and tracks user details including history of played songs, songs “liked”, ownership, and metadata of songs</p>
+      </li>
+      <li>
+        <div><span class="small-title uppercase montserrat-text">we make</span></div>
+        <div class="big-title uppercase montserrat-text">Music Database</div>
+        <p>Our database supports different payment methods, ownership(rented/bought) and playlists per user.
+ </p>
+      </li>
+    </ul>
+  </div>
+
+  <!-- HISTORY OF AGENCY -->
+  <div class="container">
+    <div class="agency">
+      <div class="col-md-5 col-sm-12">
+        <div class="row">
+          <!-- <img src="assets/img/logo.jpg" alt="image"> -->
+        <a href="index.html"><img src="http://cs.jhu.edu/~agupta82/Akad/Akad/assets/img/logo.png" alt="logo"></a>
+          
+        </div>
+      </div>
+      <div class="col-md-offset-1 col-md-6 col-sm-12">
+        <div class="row">
+          <div class="section-title">
+            <span>About JCloud</span>
+          </div>
+          <p>
+            A database that supports a media library much like SoundCloud. It stores information for each song or other audio files in the library and tracks user details including history of played songs, songs “liked”, ownership, and metadata of songs. 
+
+Our database supports different payment methods, ownership(rented/bought) and playlists per user.
+
+          </p>
+          <a href="#" class="btn green" style="float:right;margin-top:30px"><span>read more</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- newsletter -->
+  <section class="green-section wow fadeInUp" style="padding:50px 0">
+    <div class="container">
+      <div class="col-md-6 col-sm-12">
+        <div class="row">
+          <span class="white-text montserrat-text uppercase" style="font-size:30px;display:block;">
+            you think we're cool? let's work together
+          </span>
+          <a href="#" class="btn white" style="margin-top:30px"><span>get in touch</span></a>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-sm-12">
+        <div class="row">
+          <div class="white-section" style="padding:20px">
+            <span class="montserrat-text uppercase" style="font-size:24px">stay informed with our newsletter</span>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+            <form action="#" method="post">
+              <div class="input_1">
+                <input type="text" name="email">
+                <span>your email</span>
+              </div>
+              <button type="submit" class="btn green" style="margin-top:20px"><span>send</span></button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="main-footer wow fadeInUp">
+    <div class="container">
+      <div class="col-md-8 col-sm-12">
+        <div class="row">
+          <nav class="footer-nav">
+            <ul>
+              <li><a href="index.html" class="animsition-link link">Home</a></li>
+              <li><a href="about.html" class="animsition-link link">User Dashboard</a></li>
+              <li><a href="services.html" class="animsition-link link">Artist Info</a></li>
+              <li><a href="portfolio-1.html" class="animsition-link link">All Transactions</a></li>
+              <li><a href="blog-1.html" class="animsition-link link">Songs Info</a></li>
+              <li><a href="contact.html" class="animsition-link link">contact us</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-12" style="text-align:right">
+        <div class="row">
+          <div class="uppercase gray-text">
+            created by akhouad &copy;2016. all rights reserved.
+          </div>
+          <ul class="social-icons" style="margin-top:30px;float:right">
+            <li><a href="#"><i class="icon ion-social-facebook"></i></a></li>
+            <li><a href="#"><i class="icon ion-social-twitter"></i></a></li>
+            <li><a href="#"><i class="icon ion-social-youtube"></i></a></li>
+            <li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
+            <li><a href="#"><i class="icon ion-social-pinterest"></i></a></li>
+            <li><a href="#"><i class="icon ion-social-instagram"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script type="text/javascript" src="assets/js/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="assets/js/isotope.pkgd.min.js"></script>
+  <script type="text/javascript" src="assets/js/jquery.flexslider.js"></script>
+  <script type="text/javascript" src="assets/js/smoothScroll.js"></script>
+  <script type="text/javascript" src="assets/js/jquery.animsition.min.js"></script>
+  <script type="text/javascript" src="assets/js/wow.min.js"></script>
+  <script type="text/javascript" src="assets/js/main.js"></script>
+
+  <script type="text/javascript" charset="utf-8">
+    $(window).load(function() {
+      new WOW().init();
+
+      // initialise flexslider
+      $('.site-hero').flexslider({
+        animation: "fade",
+        directionNav: false,
+        controlNav: false, 
+        keyboardNav: true,
+        slideToStart: 0,
+        animationLoop: true,
+        pauseOnHover: false,
+        slideshowSpeed: 4000, 
+      });
+
+
+      // initialize isotope
+      var $container = $('.portfolio_container');
+      $container.isotope({
+        filter: '*',
+      });
+     
+      $('.portfolio_filter a').click(function(){
+        $('.portfolio_filter .active').removeClass('active');
+        $(this).addClass('active');
+     
+        var selector = $(this).attr('data-filter');
+        $container.isotope({
+          filter: selector,
+          animationOptions: {
+            duration: 500,
+            animationEngine : "jquery"
+          }
+        });
+        return false;
+      }); 
+    });
+  </script>
+</body>
+</html>

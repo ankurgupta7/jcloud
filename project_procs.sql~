@@ -1,0 +1,66 @@
+delimiter //
+
+
+DROP PROCEDURE IF EXISTS ShowUserPlaylist//
+CREATE PROCEDURE ShowUserPlaylist(IN userid int, IN LLIM int, IN ULIM int)
+BEGIN
+
+select p.list_id, t.name as title, t.length 
+from user_playlist p 
+LEFT JOIN track t
+ON p.track_id = t.id
+where p.user_id=userid
+ORDER BY p.list_id
+-- and p.list_id=playlistid
+-- LIMIT ULIM OFFSET LLIM;
+-- LIMIT  @LLIM, @ULIM
+;
+
+END//
+
+-- all transcations with user names and title names
+DROP PROCEDURE IF EXISTS ShowTransactions//
+CREATE PROCEDURE ShowTransactions()
+BEGIN
+
+
+select tran.tid as transaction_id, tran.track_id, t.name as title, tran.user_id, u.name as user, tran.payment_method , tran.price
+from transaction tran  left join users u on tran.user_id=u.id
+left join track t on t.id = tran.track_id
+;
+
+END//
+
+
+-- list songs by each artist with his info
+
+DROP PROCEDURE IF EXISTS ShowArtistInfo//
+CREATE PROCEDURE ShowArtistInfo(IN aid INT)
+BEGIN
+
+select art.id as artist_id, art.name as artist_name, art.begin_date as artist_begin_date, art.end_date as artist_end_date,
+atype.name as artist_type, area.name as area, g.name as gender_t
+from (
+		select a.id, a.name, CONCAT(a.begin_date_day, '/', a.begin_date_month , '/', a.begin_date_year) as begin_date, CONCAT(a.end_date_day, '/', a.end_date_month , '/', a.end_date_year) as end_date, a.type, a.gender, a.area
+		from artist as a 
+		where a.id=aid 	) as art, 
+area, artist_type as atype, gender as g
+where atype.id=art.type 
+and g.id = art.gender
+and area.id=art.area
+;
+END//
+
+
+
+
+
+
+
+delimiter ;
+
+
+-- call ShowUserPlaylist(1,1,100);
+
+-- call ShowTransactions();
+call ShowArtistInfo(110);
