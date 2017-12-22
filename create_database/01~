@@ -1,0 +1,17 @@
+ SELECT * from area_type LIMIT 2;
+ SELECT * from area LIMIT 2;
+ SELECT * from artist LIMIT 2;
+ SELECT * from artist_type LIMIT 2;
+ SELECT * from gender LIMIT 2;
+ SELECT * from label LIMIT 2;
+ SELECT * from release LIMIT 2;
+ SELECT * from artist_credit LIMIT 2;
+ SELECT * from release_group LIMIT 2;
+ SELECT * from release_packaging LIMIT 2;
+ SELECT * from release_status LIMIT 2;
+ SELECT * from language LIMIT 2;
+ SELECT * from script LIMIT 2;
+ SELECT * from url LIMIT 2;
+ SELECT * from track LIMIT 2;
+ SELECT * from medium LIMIT 2;
+ SELECT * from medium_format LIMIT 2;
